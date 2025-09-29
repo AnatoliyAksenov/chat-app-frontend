@@ -1,0 +1,16 @@
+#root {
+  margin: 0 auto;
+}
+
+.login-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.login-card {
+  width: 400px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
