@@ -49,6 +49,7 @@ __Продублировано из репозитория Gitlab Агента__
 - MCP Сервер: https://github.com/AnatoliyAksenov/chat-app-mcp
 - LLM Chat backend: https://github.com/AnatoliyAksenov/chat-app-backend
 - LLM Chat frontend: https://github.com/AnatoliyAksenov/chat-app-frontend
+- Gitlab Agent: https://github.com/AnatoliyAksenov/gitlab-agent
 
 
 Также, мы подготовили развернутый стенд

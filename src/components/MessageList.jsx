@@ -5,8 +5,9 @@ import { LoadingOutlined } from '@ant-design/icons'
 import { Bubble } from '@ant-design/x'
 
 import styled, { keyframes } from 'styled-components'
-import Markdown from 'react-markdown'
+import Markdown, { defaultUrlTransform } from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import remarkImages from 'remark-images'
 
 
 const { Text } = Typography
@@ -20,6 +21,9 @@ const welcom_text = `
 📊 **Доступность таблиц** — найду нужные таблицы и проверю, доступны ли они  
 📝 **Структура (DDL)** — покажу структуру любой таблицы  
 ⚡ **Пайплайны данных** — настрою автоматическую загрузку данных
+
+![Base64 Image 1](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==)
+
 
 **С чего начнем? Просто расскажи, что нужно, и отправим данные для подключения!**`
 
@@ -76,6 +80,9 @@ export const MessageList = ({ messages: propMessages }) => {
     [messages]
   );
 
+  const urlTransform = (url) =>
+        url.startsWith('data:') ? url : defaultUrlTransform(url)
+
   if (!sortedMessages.length) {
     return (
       <div style={{ 
@@ -85,7 +92,7 @@ export const MessageList = ({ messages: propMessages }) => {
       }}>
         <Image src="bender.svg" width="100px" />
         <div style={{textAlign: 'left', width: '600px', color: 'black', paddingTop: '30px'}}>
-            <Markdown remarkPlugins={[remarkGfm]}>
+            <Markdown remarkPlugins={[remarkGfm, remarkImages]} urlTransform={urlTransform}>
               {welcom_text}
             </Markdown>
         </div>
@@ -104,7 +111,7 @@ export const MessageList = ({ messages: propMessages }) => {
             <Bubble 
               placement={msg.sender === 'user'? 'end': 'start'}
               loading={msg.typing}
-              content={(<Markdown remarkPlugins={[remarkGfm]}>{msg.content}</Markdown>)}
+              content={(<Markdown remarkPlugins={[remarkGfm, remarkImages]} urlTransform={urlTransform}>{msg.content}</Markdown>)}
               avatar={msg.sender !== 'user'? <Image src="bender.svg" width="30px" preview={false}/>: <Image src="fry.svg" width="30px" style={{'transform': 'scaleX(-1)'}} preview={false}/>}
               styles={{ content: { maxWidth: 500 } }}
             />
